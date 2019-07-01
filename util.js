@@ -65,21 +65,11 @@ export const boundingBoxToRegion = (bbox) => {
  * @param {Function|String} accessor - accessor for item coordinate values. Could be a string (field name) or a function (that describe how to access to coordinate data).
  * @returns {Object} - GeoJSON Feature object
  */
-export const itemToGeoJSONFeature = (item, accessor) => {
-  let coordinates = []
-
-  if (typeof accessor === 'string') {
-    coordinates = [item[accessor].longitude, item[accessor].latitude]
-  } else if (typeof accessor === 'function') {
-    coordinates = accessor(item)
-  }
-
-  return {
-    type: 'Feature',
-    geometry: {
-      coordinates,
-      type: 'Point',
-    },
-    properties: { point_count: 0, item } // eslint-disable-line camelcase
-  }
-}
+ export const itemToGeoJSONFeature = (item) => ({
+   type: 'Feature',
+   geometry: {
+     type: 'Point',
+     coordinates: [item.longitude, item.latitude]
+   },
+   properties: { point_count: 0, item } // eslint-disable-line camelcase
+ })

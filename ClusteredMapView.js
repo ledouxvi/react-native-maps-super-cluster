@@ -72,7 +72,7 @@ export default class ClusteredMapView extends Component {
   getClusteringEngine = () => this.index
 
   clusterize = (dataset) => {
-    this.index = SuperCluster({ // eslint-disable-line new-cap
+    this.index = new SuperCluster({ // eslint-disable-line new-cap
       extent: this.props.extent,
       minZoom: this.props.minZoom,
       maxZoom: this.props.maxZoom,
@@ -110,6 +110,11 @@ export default class ClusteredMapView extends Component {
     return this.index.getClusters(bbox, viewport.zoom)
   }
 
+  _onRegionChange = (region) =>
+  {
+    this.props.onRegionChange && this.props.onRegionChange(region)
+  }
+
   onClusterPress = (cluster) => {
 
     // cluster press behavior might be extremely custom.
@@ -140,6 +145,7 @@ export default class ClusteredMapView extends Component {
       <MapView
         { ...this.props}
         ref={this.mapRef}
+        onRegionChange={this._onRegionChange}
         onRegionChangeComplete={this.onRegionChangeComplete}>
         {
           this.props.clusteringEnabled && this.state.data.map((d) => {

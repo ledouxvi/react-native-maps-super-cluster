@@ -111,7 +111,7 @@ export default class ClusteredMapView extends Component {
     var data = this.getClusters(region)
 
 
-    console.warn(data);
+    //console.warn(data);
     if (!isEqual(data, this.state.data)) {
       data = this.unexplode(data, region);
       return this.setState({ region, data }, () => {
@@ -192,7 +192,7 @@ export default class ClusteredMapView extends Component {
         //console.warn("childrenItem", childrenItem);
         if (childrenItem.id === item.id)
         {
-          console.warn("update", childrenItem.id);
+          // console.warn("update", childrenItem.id);
           /* if (i % 2 === 0)
 		   {*/
           this.exploded.push({
@@ -256,7 +256,7 @@ export default class ClusteredMapView extends Component {
 
     const data = this.getClusters(this.state.region);
 
-    console.warn(data);
+    //console.warn(data);
     this.setState({ data });
 
   }
@@ -391,7 +391,7 @@ export default class ClusteredMapView extends Component {
           {this.ungroupLines.length > 0
               ? this.ungroupLines.map((group) =>
               {
-                console.warn(group);
+                //console.warn(group);
                 return (
                     <MapView.Polyline
                         coordinates={group}
@@ -406,7 +406,7 @@ export default class ClusteredMapView extends Component {
           {this.groupCenter.length > 0
               ? this.groupCenter.map((center) =>
               {
-                console.warn(center);
+                //console.warn(center);
                 return (
                     <Marker
                         coordinate={center}>

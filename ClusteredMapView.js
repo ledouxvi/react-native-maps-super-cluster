@@ -1,5 +1,3 @@
-import DB from 'realm-orm';
-
 'use-strict'
 
 // base libs
@@ -128,10 +126,6 @@ export default class ClusteredMapView extends Component {
     {
       let dataset = this.props.data.map((item) =>
       {
-        if (!DB.db.isInTransaction)
-        {
-          DB.db.beginTransaction();
-        }
         for (var i = 0; i < this.exploded.length; i++)
         {
           let explodedItem = this.exploded[i];
@@ -142,11 +136,6 @@ export default class ClusteredMapView extends Component {
             item.longitude = explodedItem.longitude;
 
           }
-        }
-
-        if (DB.db.isInTransaction)
-        {
-          DB.db.commitTransaction();
         }
 
         return item;
@@ -180,10 +169,6 @@ export default class ClusteredMapView extends Component {
     let newArray = []
     dataset = dataset.map((item) =>
     {
-      if(!DB.db.isInTransaction)
-      {
-        DB.db.beginTransaction();
-      }
       //console.warn("check", item);
       const angle = 360 / children.length;
       for(var i = 0; i < children.length; i++)
@@ -217,11 +202,6 @@ export default class ClusteredMapView extends Component {
 		   }*/
 
         }
-      }
-
-      if(DB.db.isInTransaction)
-      {
-        DB.db.commitTransaction();
       }
 
       return item;
